@@ -19,17 +19,9 @@ Route::prefix('growth_sessions')->middleware(AuthenticateSlackApp::class)->name(
     Route::post('{growth_session}/join', 'GrowthSessionController@join')->middleware(['auth', 'can:join,growth_session'])->name('join');
     Route::post('{growth_session}/leave', 'GrowthSessionController@leave')->middleware(['auth', 'can:leave,growth_session'])->name('leave');
 });
-Route::resource('growth_sessions', 'GrowthSessionController')->middleware('auth')->only(['store', 'update', 'destroy'])->names([
-    'store' => 'growth_sessions.store',
-    'update' => 'growth_sessions.update',
-    'destroy' => 'growth_sessions.destroy',
-]);
+Route::resource('growth_sessions', 'GrowthSessionController')->middleware('auth')->only(['store', 'update', 'destroy']);
 
 Route::prefix('growth_sessions/{growth_session}/comments')->name('growth_sessions.comments.')->group(function() {
     Route::get('/', 'CommentController@index')->name('index');
 });
-Route::resource('growth_sessions.comments', 'CommentController')->middleware('auth')->only(['store','update','destroy'])->names([
-    'store' => 'growth_sessions.comments.store',
-    'update' => 'growth_sessions.comments.update',
-    'destroy' => 'growth_sessions.comments.destroy',
-]);
+Route::resource('growth_sessions.comments', 'CommentController')->middleware('auth')->only(['store','update','destroy']);
