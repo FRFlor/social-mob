@@ -9,7 +9,7 @@ class UpdateGrowthSessionRequest extends FormRequest
 {
     public function authorize()
     {
-        return $this->user()->can('update', $this->social_mob);
+        return $this->user()->can('update', $this->growth_session);
     }
 
     protected function prepareForValidation()
@@ -24,7 +24,7 @@ class UpdateGrowthSessionRequest extends FormRequest
     public function rules()
     {
         $minimumAttendees = 4;
-        $currentAttendees = $this->social_mob->attendees()->count();
+        $currentAttendees = $this->growth_session->attendees()->count();
 
         return [
             'title' => 'sometimes|required|string|max:45',

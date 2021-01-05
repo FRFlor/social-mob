@@ -11,24 +11,24 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::view('/', 'home')->name('home');
 
-Route::prefix('social_mobs')->middleware(AuthenticateSlackApp::class)->name('growth_sessions.')->group(function() {
+Route::prefix('growth_sessions')->middleware(AuthenticateSlackApp::class)->name('growth_sessions.')->group(function() {
     Route::get('week', 'GrowthSessionController@week')->name('week');
     Route::get('day', 'GrowthSessionController@day')->name('day');
-    Route::get('{social_mob}', 'GrowthSessionController@show')->name('show');
-    Route::get('{social_mob}/edit', 'GrowthSessionController@edit')->middleware(['auth','can:update,social_mob'])->name('edit');
-    Route::post('{social_mob}/join', 'GrowthSessionController@join')->middleware(['auth', 'can:join,social_mob'])->name('join');
-    Route::post('{social_mob}/leave', 'GrowthSessionController@leave')->middleware(['auth', 'can:leave,social_mob'])->name('leave');
+    Route::get('{growth_session}', 'GrowthSessionController@show')->name('show');
+    Route::get('{growth_session}/edit', 'GrowthSessionController@edit')->middleware(['auth','can:update,growth_session'])->name('edit');
+    Route::post('{growth_session}/join', 'GrowthSessionController@join')->middleware(['auth', 'can:join,growth_session'])->name('join');
+    Route::post('{growth_session}/leave', 'GrowthSessionController@leave')->middleware(['auth', 'can:leave,growth_session'])->name('leave');
 });
-Route::resource('social_mobs', 'GrowthSessionController')->middleware('auth')->only(['store', 'update', 'destroy'])->names([
+Route::resource('growth_sessions', 'GrowthSessionController')->middleware('auth')->only(['store', 'update', 'destroy'])->names([
     'store' => 'growth_sessions.store',
     'update' => 'growth_sessions.update',
     'destroy' => 'growth_sessions.destroy',
 ]);
 
-Route::prefix('social_mobs/{social_mob}/comments')->name('growth_sessions.comments.')->group(function() {
+Route::prefix('growth_sessions/{growth_session}/comments')->name('growth_sessions.comments.')->group(function() {
     Route::get('/', 'CommentController@index')->name('index');
 });
-Route::resource('social_mobs.comments', 'CommentController')->middleware('auth')->only(['store','update','destroy'])->names([
+Route::resource('growth_sessions.comments', 'CommentController')->middleware('auth')->only(['store','update','destroy'])->names([
     'store' => 'growth_sessions.comments.store',
     'update' => 'growth_sessions.comments.update',
     'destroy' => 'growth_sessions.comments.destroy',

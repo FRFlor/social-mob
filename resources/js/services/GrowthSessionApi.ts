@@ -1,10 +1,16 @@
 import BaseApi from './BaseApi';
-import {IComment, IGrowthSession, IStoreGrowthSessionRequest, IUpdateGrowthSessionRequest, IWeekGrowthSessions} from '../types';
+import {
+    IComment,
+    IGrowthSession,
+    IStoreGrowthSessionRequest,
+    IUpdateGrowthSessionRequest,
+    IWeekGrowthSessions
+} from '../types';
 import {DateTime} from '../classes/DateTime';
 import {GrowthSession} from '../classes/GrowthSession';
 import {WeekGrowthSessions} from '../classes/WeekGrowthSessions';
 
-export const growthSessionResource = 'social_mobs';
+export const growthSessionResource = 'growth_sessions';
 
 export class GrowthSessionApi extends BaseApi {
     static async getAllGrowthSessionsOfTheWeek(date: string = DateTime.today().toDateString()): Promise<WeekGrowthSessions> {

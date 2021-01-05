@@ -8,7 +8,7 @@ class DeleteGrowthSessionRequest extends FormRequest
 {
     public function authorize()
     {
-        return $this->user()->can('delete', $this->social_mob);
+        return $this->user()->can('delete', $this->growth_session);
     }
 
     public function rules()

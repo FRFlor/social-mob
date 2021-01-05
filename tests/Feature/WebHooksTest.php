@@ -143,9 +143,9 @@ class WebHooksTest extends TestCase
         $growthSession = $this->actingAs($user)
             ->postJson(route('growth_sessions.store'), $growthSessionData)->assertSuccessful();
         $this->actingAs($user)
-            ->putJson(route('growth_sessions.update', ['social_mob' => $growthSession['id']]), ['topic' => 'new topic'])->assertSuccessful();
+            ->putJson(route('growth_sessions.update', ['growth_session' => $growthSession['id']]), ['topic' => 'new topic'])->assertSuccessful();
         $this->actingAs($user)
-            ->deleteJson(route('growth_sessions.destroy', ['social_mob' => $growthSession['id']]))->assertSuccessful();
+            ->deleteJson(route('growth_sessions.destroy', ['growth_session' => $growthSession['id']]))->assertSuccessful();
 
         Http::assertNothingSent();
     }
