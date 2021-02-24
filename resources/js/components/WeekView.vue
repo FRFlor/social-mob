@@ -19,7 +19,7 @@
             </button>
         </div>
 
-        <div class="flex justify-center flex-wrap">
+        <div class="flex justify-center flex-wrap h-screen overflow-y-scroll shadow-inner border-b-2">
             <modal :dynamic="true" :height="600" :width="500" name="growth-session-form">
                 <div class="flex w-full h-full">
                     <growth-session-form :growth-session="growthSessionToUpdate"
@@ -34,11 +34,15 @@
                  :class="{
                  'bg-blue-100': date.weekDayNumber() % 2 === 0,
                  'bg-blue-200': date.weekDayNumber() % 2 !== 0,
-                 'hidden': !date.isToday()
                  }"
                  :weekDay="date.weekDayString()"
                  class="day text-center mx-1 mb-2 px-2 md:block">
-                <h3 class="text-lg text-blue-700 font-bold mt-6 mb-3" v-text="date.weekDayString()"></h3>
+                <h3 class="text-lg text-blue-700 font-bold mt-6 mb-3 sticky top-0 py-2 z-30"
+                    :class="{
+                 'bg-blue-100': date.weekDayNumber() % 2 === 0,
+                 'bg-blue-200': date.weekDayNumber() % 2 !== 0,
+                 }"
+                    v-text="date.weekDayString()"></h3>
                 <div v-show="growthSessions.getSessionByDate(date).length === 0" class="text-blue-600 text-lg my-4">
                     <p v-text="`${Nothingator.random()}...`"/>
                     <p v-show="user && date.isToday()">Why don't you create the first one?</p>
